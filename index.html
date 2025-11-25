@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huella Estrella – Porque tu bienestar tiene Huella</title>
+  <meta name="description" content="Huella Estrella es un servicio de compañía canina terapéutica para acompañar a personas que viven soledad y mejorar su bienestar día a día.">
+
+  <style>
+    /* QUIZ INTERACTIVO */
+.quiz-card {
+  background: #fffdf8;
+  border-radius: 1.4rem;
+  border: 1px solid #ecdcc0;
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  font-size: 0.95rem;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.04);
+}
+
+.quiz-question p {
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+  color: var(--brown);
+}
+
+.quiz-question label {
+  display: block;
+  margin-bottom: 0.25rem;
+  cursor: pointer;
+  color: var(--brown-soft);
+}
+
+.quiz-question input[type="radio"] {
+  margin-right: 0.4rem;
+}
+
+.quiz-result {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  border-radius: 1.1rem;
+  border: 1px solid transparent;
+  font-size: 0.92rem;
+}
+
+.quiz-result--alto {
+  border-color: rgba(205,160,82,0.8);
+  background: #fbe9c9;
+}
+
+.quiz-result--medio {
+  border-color: #e3cfb0;
+  background: #fdf3dd;
+}
+
+.quiz-result--bajo {
+  border-color: #d7d7d7;
+  background: #fafafa;
+}
+
+.quiz-result strong {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.quiz-result a {
+  color: var(--gold-dark);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+    .dog-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 1rem;
+  margin-bottom: 0.6rem;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+    /* ANIMACIÓN DE ENTRADA SUAVE */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Aplicamos la animación al hero */
+.hero-main,
+.hero-side {
+  opacity: 0; /* estado inicial */
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.hero-side {
+  animation-delay: 0.18s; /* entra tantito después del texto */
+}
+
+    :root {
+      --bg: #fdf5e8;
+      --bg-soft: #f7ead5;
+      --gold: #cda052;
+      --gold-dark: #b38030;
+      --brown: #4b3a2a;
+      --brown-soft: #7a6450;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      background-color: var(--bg);
+      color: var(--brown);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(253,245,232,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5d3b6;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo-area img {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.4rem;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.2rem;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.2s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* SECCIONES GENERALES */
+    section {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.98rem;
+      color: var(--brown-soft);
+      max-width: 40rem;
+      margin-bottom: 1.8rem;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 3.5rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-main h1 {
+      font-size: clamp(2.2rem, 3vw + 1rem, 3rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-main p {
+      font-size: 1.1rem;
+      color: var(--brown-soft);
+      margin-bottom: 1.5rem;
+      max-width: 32rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      font-size: 0.8rem;
+      border: 1px solid #e5d3b6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--white);
+      box-shadow: 0 8px 18px rgba(149,111,47,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(149,111,47,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--brown);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-soft);
+    }
+
+    .hero-note {
+      font-size: 0.9rem;
+      color: var(--brown-soft);
+    }
+
+    /* HERO LADO DERECHO CON VIDEO */
+    .hero-side {
+      background: radial-gradient(circle at top, #f9e3b3 0, #fdf5e8 45%, #fdf5e8 100%);
+      border-radius: 1.75rem;
+      padding: 2rem 1.8rem;
+      box-shadow: 0 14px 40px rgba(126,99,61,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .hero-video {
+      width: 100%;
+      max-width: 500px;
+      height: 260px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 1.4rem;
+      margin-bottom: 0.8rem;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+    }
+
+    .hero-tag {
+      font-size: 0.8rem;
+      color: var(--brown-soft);
+      border-top: 1px solid rgba(75,58,42,0.15);
+      padding-top: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    /* SOBRE */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.8rem;
+    }
+
+    .about-card {
+      background: var(--bg-soft);
+      border-radius: 1.4rem;
+      padding: 1.5rem 1.6rem;
+      border: 1px solid #e3cfb0;
+      font-size: 0.93rem;
+      color: var(--brown-soft);
+    }
+
+    .about-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--brown);
+    }
+
+    .pill-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .pill-list li {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: #fdf0d4;
+    }
+
+    /* BENEFICIOS */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.2rem;
+    }
+
+    .benefit-card {
+      background: var(--bg-soft);
+      border-radius: 1.4rem;
+      padding: 1.3rem 1.4rem;
+      border: 1px solid #e3cfb0;
+      font-size: 0.93rem;
+    }
+
+    .benefit-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .benefit-tagline {
+      font-size: 0.8rem;
+      color: var(--brown-soft);
+      margin-top: 0.4rem;
+    }
+
+    /* CARRUSEL PERROS */
+    .dog-carousel {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      scroll-snap-type: x mandatory;
+    }
+
+    .dog-card {
+      min-width: 230px;
+      max-width: 260px;
+      background: var(--bg-soft);
+      border-radius: 1.2rem;
+      padding: 1.1rem 1.2rem;
+      border: 1px solid #e3cfb0;
+      scroll-snap-align: start;
+      font-size: 0.9rem;
+    }
+
+    .dog-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .dog-tagline {
+      font-size: 0.8rem;
+      color: var(--brown-soft);
+      margin-bottom: 0.4rem;
+    }
+
+    .dog-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 1rem;
+      margin-bottom: 0.6rem;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+    /* BLOG */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.2rem;
+    }
+
+    .blog-card {
+      background: var(--white);
+      border-radius: 1.2rem;
+      padding: 1.2rem 1.3rem;
+      border: 1px solid #ead7bc;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      min-height: 210px;
+      font-size: 0.9rem;
+    }
+
+    .blog-card h3 {
+      font-size: 1rem;
+    }
+
+    .blog-card p {
+      color: var(--brown-soft);
+      flex: 1;
+    }
+
+    .blog-card a {
+      font-size: 0.9rem;
+      color: var(--gold-dark);
+      font-weight: 500;
+    }
+
+    /* TESTIMONIOS */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.2rem;
+    }
+
+    .testimonial-card {
+      background: #fffdf8;
+      border-radius: 1.2rem;
+      padding: 1.2rem 1.3rem;
+      border: 1px solid #ecdcc0;
+      font-size: 0.9rem;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 0.6rem;
+    }
+
+    .testimonial-name {
+      font-size: 0.8rem;
+      color: var(--brown-soft);
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      font-size: 0.9rem;
+    }
+
+    .faq-list details {
+      background: var(--bg-soft);
+      border-radius: 0.9rem;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid #e3cfb0;
+    }
+
+    .faq-list summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .faq-list p {
+      margin-top: 0.4rem;
+      color: var(--brown-soft);
+    }
+
+    /* CTA AGENDA */
+    .cta-box {
+      background: linear-gradient(135deg, #f6e0b8, #fdf5e8);
+      border-radius: 1.6rem;
+      padding: 1.8rem 1.9rem;
+      border: 1px solid #e3cfb0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cta-text {
+      max-width: 34rem;
+      font-size: 0.98rem;
+    }
+
+    .cta-text h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .cta-small {
+      font-size: 0.85rem;
+      color: var(--brown-soft);
+      margin-top: 0.4rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #e5d3b6;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.85rem;
+      color: var(--brown-soft);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-side {
+        order: -1;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .benefits-grid,
+      .blog-grid,
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      nav ul {
+        display: none;
+      }
+      .cta-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero {
+        padding-top: 2.2rem;
+      }
+      .dog-carousel {
+        padding-left: 0.2rem;
+      }
+    }
+    /* HOVER SUAVE EN BOTONES */
+.btn {
+  transition: transform 0.15s ease, 
+              box-shadow 0.15s ease, 
+              background 0.15s ease,
+              border-color 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* TARJETAS CON EFECTO LIFT EN HOVER */
+.benefit-card,
+.blog-card,
+.dog-card,
+.testimonial-card,
+.about-card {
+  transition: transform 0.18s ease, 
+              box-shadow 0.18s ease, 
+              border-color 0.18s ease;
+}
+
+.benefit-card:hover,
+.blog-card:hover,
+.dog-card:hover,
+.testimonial-card:hover,
+.about-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  border-color: rgba(205,160,82,0.6); /* dorado suave */
+}
+/* ESTILO BASE PARA SECCIONES ANIMADAS */
+.section-inner {
+  position: relative;
+}
+
+/* Clases de utilidad por si luego las usas más */
+.fade-section {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Cuando agreguemos esta clase con JS se verá */
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="nav-container">
+      <div class="logo-area">
+        <img src="logo-huella.png" alt="Logo Huella Estrella">
+        <span class="logo-text">Huella Estrella</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="agenda.html">Agenda tu visita</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main id="inicio">
+    <section class="hero">
+      <div class="hero-main">
+        <h1>Porque tu bienestar tiene Huella</h1>
+        <p>
+          Huella Estrella es un espacio donde la compañía canina terapéutica
+          ayuda a personas que viven soledad a recuperar rutina, alegría y
+          sentido de comunidad.
+        </p>
+
+        <div class="hero-badges">
+          <span class="badge">Compañía canina terapéutica</span>
+          <span class="badge">Enfoque en personas adultas y mayores</span>
+          <span class="badge">Acompañamiento emocional</span>
+        </div>
+
+        <div class="hero-buttons">
+          <a href="agenda.html" class="btn btn-primary">Visitar el centro</a>
+          <a href="agenda.html" class="btn btn-outline">Próximo evento informativo</a>
+        </div>
+
+        <p class="hero-note">
+          En nuestra página podrás conocer a nuestros perros, leer artículos sobre bienestar
+          y agendar tu próxima visita en pocos pasos.
+        </p>
+      </div>
+
+      <aside class="hero-side video-card">
+        <video autoplay muted loop playsinline class="hero-video">
+          <source src="video/perro-caminando.mp4" type="video/mp4">
+          Tu navegador no soporta video HTML5.
+        </video>
+        <h2>Un paso a la vez</h2>
+        <p>
+          Imagina recibir esta bienvenida cada semana: un perro caminando hacia ti,
+          con calma y confianza, para recordarte que no estás solo.
+        </p>
+        <p class="hero-tag">
+          Huella Estrella convierte momentos simples en compañía real.
+        </p>
+      </aside>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre">
+      <div class="section-inner">
+        <h2 class="section-title">¿Qué es Huella Estrella?</h2>
+        <p class="section-subtitle">
+          Somos un servicio de compañía canina terapéutica que conecta a personas que viven
+          soledad con perros especialmente entrenados para acompañar, escuchar y mejorar la rutina
+          diaria a través de momentos de juego, paseo y calma compartida.
+        </p>
+
+        <div class="about-grid">
+          <div class="about-card">
+            <h3>Para quienes sienten que falta alguien en casa</h3>
+            <p>
+              Huella Estrella está pensada para personas adultas y adultas mayores
+              que desean volver a sentirse acompañadas, pero que no siempre pueden
+              hacerse responsables de un perro de tiempo completo.
+            </p>
+            <ul class="pill-list">
+              <li>Personas que viven solas</li>
+              <li>Cuidadores que necesitan apoyo</li>
+              <li>Familias que quieren sumar compañía a un ser querido</li>
+            </ul>
+          </div>
+
+          <div class="about-card">
+            <h3>Un centro de entrenamiento para conocerse</h3>
+            <p>
+              A través de nuestra página podrás crear una visita guiada al
+              centro de entrenamiento para conocer a los perros, observar cómo
+              trabajan con nuestros entrenadores y elegir el esquema de
+              acompañamiento que mejor se adapte a tus necesidades.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section id="beneficios">
+      <div class="section-inner">
+        <h2 class="section-title">Beneficios de la compañía canina terapéutica</h2>
+        <p class="section-subtitle">
+          Nuestros programas están diseñados para apoyar tanto la parte emocional
+          como la rutina cotidiana de cada persona.
+        </p>
+
+        <div class="benefits-grid">
+          <article class="benefit-card">
+            <h3>Menos soledad, más presencia</h3>
+            <p>
+              La compañía canina aporta presencia constante, escucha silenciosa
+              y una sensación real de “estar acompañado”, incluso en los días más difíciles.
+            </p>
+            <p class="benefit-tagline">Pequeños momentos que marcan la diferencia.</p>
+          </article>
+
+          <article class="benefit-card">
+            <h3>Rutinas más saludables</h3>
+            <p>
+              Paseos suaves, horarios definidos y actividades guiadas ayudan a
+              estructurar el día y dan motivos para levantarse cada mañana.
+            </p>
+            <p class="benefit-tagline">La constancia del perro se vuelve tu aliada.</p>
+          </article>
+
+          <article class="benefit-card">
+            <h3>Bienestar emocional</h3>
+            <p>
+              La interacción con perros puede reducir estrés y ansiedad. En Huella Estrella
+              traducimos esa evidencia en visitas, sesiones y programas reales.
+            </p>
+            <p class="benefit-tagline">Acompañamiento desde la ciencia y la empatía.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARRUSEL PERROS -->
+    <section>
+      <div class="section-inner">
+        <h2 class="section-title">Conoce a algunos de nuestros perros</h2>
+        <p class="section-subtitle">
+          Cada perro ha sido seleccionado y entrenado para ofrecer una compañía tranquila,
+          respetuosa y amorosa.
+        </p>
+
+        <div class="dog-carousel">
+          <article class="dog-card">
+            <img src="perros/luna-golden.png" alt="Luna Golden Retriever" class="dog-img">
+            <h3>Luna – Golden Retriever</h3>
+            <p class="dog-tagline">Calma, cariñosa, ideal para visitas tranquilas.</p>
+            <p>
+              Le encanta sentarse a tu lado mientras lees, tomas café o simplemente piensas en silencio.
+              Es paciente y muy suave en sus movimientos.
+            </p>
+          </article>
+
+          <article class="dog-card">
+            <img src="perros/bruno-labrador.png" alt="Bruno Labrador" class="dog-img">
+            <h3>Bruno – Labrador</h3>
+            <p class="dog-tagline">Sereno y siempre leal.</p>
+            <p>
+              Le gustan los paseos cortos, las siestas cerca del sillón y las tardes sin prisa. Su presencia serena ayuda a bajar el ritmo del día.
+              
+            </p>
+          </article>
+
+          <article class="dog-card">
+            <img src="perros/mila-mediana.png" alt="Mila mediana multicolor" class="dog-img">
+            <h3>Mila – Labradora </h3>
+            <p class="dog-tagline">Observadora, sensible, muy empática.</p>
+            <p>
+              Responde muy bien a personas que hablan poco pero sienten mucho.
+              Es atenta a tus gestos y suele acercarse con delicadeza cuando nota
+              que la necesitas cerca.
+            </p>
+          </article>
+
+          <article class="dog-card">
+            <img src="perros/simon-mestizo.png" alt="Simón mestizo tranquilo" class="dog-img">
+            <h3>Simón – Mestizo</h3>
+            <p class="dog-tagline">El compañero ideal para rutinas suaves.</p>
+            <p>
+              Perfecto para paseos suaves y para animar el día. Bruno sabe respetar el espacio, pero siempre está listo para ofrecer una cola que se mueve cuando te ve.
+
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+<section id="quiz">
+  <div class="section-inner">
+    <h2 class="section-title">¿Este tipo de compañía podría ayudarte?</h2>
+    <p class="section-subtitle">
+      Responde este mini cuestionario de forma sencilla. No sustituye una evaluación profesional,
+      pero puede darte una idea de si la compañía canina terapéutica podría sumar a tu bienestar.
+    </p>
+
+    <form id="huellaQuiz" class="quiz-card">
+      <div class="quiz-question">
+        <p>1. ¿Con qué frecuencia pasas la mayor parte del día en soledad?</p>
+        <label>
+          <input type="radio" name="q1" value="3" required>
+          Casi todos los días
+        </label>
+        <label>
+          <input type="radio" name="q1" value="2">
+          Varias veces por semana
+        </label>
+        <label>
+          <input type="radio" name="q1" value="1">
+          Rara vez
+        </label>
+      </div>
+
+      <div class="quiz-question">
+        <p>2. ¿Qué tanto extrañas tener alguien con quien platicar o simplemente compartir silencio?</p>
+        <label>
+          <input type="radio" name="q2" value="3" required>
+          Mucho, casi todos los días
+        </label>
+        <label>
+          <input type="radio" name="q2" value="2">
+          A veces, depende del día
+        </label>
+        <label>
+          <input type="radio" name="q2" value="1">
+          Casi no lo siento así
+        </label>
+      </div>
+
+      <div class="quiz-question">
+        <p>3. ¿Cómo te sentirías con una rutina suave de paseos o momentos tranquilos con un perro entrenado?</p>
+        <label>
+          <input type="radio" name="q3" value="3" required>
+          Me ilusiona, creo que me haría bien
+        </label>
+        <label>
+          <input type="radio" name="q3" value="2">
+          Me da curiosidad, podría intentarlo
+        </label>
+        <label>
+          <input type="radio" name="q3" value="1">
+          No lo veo como algo para mí
+        </label>
+      </div>
+
+      <div class="quiz-question">
+        <p>4. Cuando te sientes triste o cansado(a), ¿te ayuda la presencia de un animal?</p>
+        <label>
+          <input type="radio" name="q4" value="3" required>
+          Sí, mucho
+        </label>
+        <label>
+          <input type="radio" name="q4" value="2">
+          A veces
+        </label>
+        <label>
+          <input type="radio" name="q4" value="1">
+          No lo tengo claro
+        </label>
+      </div>
+
+      <div class="quiz-question">
+        <p>5. ¿Te gustaría tener un espacio seguro para probar este tipo de compañía sin compromisos largos?</p>
+        <label>
+          <input type="radio" name="q5" value="3" required>
+          Sí, quiero probar
+        </label>
+        <label>
+          <input type="radio" name="q5" value="2">
+          Tal vez, pero con más información
+        </label>
+        <label>
+          <input type="radio" name="q5" value="1">
+          Por ahora no
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Ver mi resultado</button>
+    </form>
+
+    <div id="quizResult" class="quiz-result" aria-live="polite"></div>
+  </div>
+</section>
+
+    <!-- BLOG -->
+    <section id="blog">
+      <div class="section-inner">
+        <h2 class="section-title">Blog Huella Estrella</h2>
+        <p class="section-subtitle">
+          Nuestro blog nos permite llegar a quienes están buscando soluciones para la soledad.
+          Cada artículo está pensado para informar, acompañar y ofrecer un siguiente paso claro.
+        </p>
+
+        <div class="blog-grid">
+          <article class="blog-card">
+            <h3>Soledad en la vida adulta: cuando el silencio pesa más</h3>
+            <p>
+              Exploramos cómo la soledad se manifiesta en la rutina diaria y cómo
+              pequeños momentos de compañía pueden aliviarla.
+            </p>
+            <a href="agenda.html">Leer más y explorar una visita →</a>
+          </article>
+
+          <article class="blog-card">
+            <h3>Convivencia con perros: presencia, rutina y afecto</h3>
+            <p>
+              Más allá del juego, la convivencia con un perro entrenado puede ayudar a
+              reconstruir rutinas suaves y ofrecer un afecto constante.
+            </p>
+            <a href="agenda.html">Quiero saber cómo empezar →</a>
+          </article>
+
+          <article class="blog-card">
+            <h3>Historias reales: cuando un perro cambia un día entero</h3>
+            <p>
+              Relatos breves de personas que experimentaron un antes y un después
+              al incluir visitas de compañía canina en su semana.
+            </p>
+            <a href="agenda.html">Conocer historias y reservar →</a>
+          </article>
+
+          <article class="blog-card">
+            <h3>Bienestar con animales: lo que dice la ciencia</h3>
+            <p>
+              Un resumen claro de estudios que muestran cómo la interacción con perros
+              puede disminuir estrés, ansiedad y sensación de soledad.
+            </p>
+            <a href="agenda.html">Ver evidencia y agendar una charla →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+      <div class="section-inner">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <p class="section-subtitle">
+          Si te preguntas si Huella Estrella es para ti o para un familiar, estas respuestas
+          pueden ayudarte a dar el primer paso con más tranquilidad.
+        </p>
+
+        <div class="faq-list">
+          <details>
+            <summary>¿En qué consiste una visita guiada?</summary>
+            <p>
+              Es una cita en el centro de entrenamiento donde conocerás a algunos perros,
+              platicarás con nuestro equipo y revisaremos qué tipo de acompañamiento se
+              ajusta mejor a tu situación.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿Los perros viven conmigo?</summary>
+            <p>
+              No necesariamente. Nuestro modelo está pensado para ofrecer compañía frecuente
+              sin exigir que la persona se haga responsable de un perro de tiempo completo,
+              salvo que así se decida más adelante.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿Cómo se cuida el bienestar de los perros?</summary>
+            <p>
+              Trabajamos con horarios, tiempos de descanso y protocolos claros para que
+              los perros no se sobrecarguen. Su bienestar es tan importante como el de
+              las personas que acompañan.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿Para quién está pensado este servicio?</summary>
+            <p>
+              Principalmente para personas adultas y adultas mayores que viven soledad
+              o pasan muchas horas sin compañía, así como para familias que buscan
+              sumar apoyo emocional a un ser querido.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section>
+      <div class="section-inner">
+        <h2 class="section-title">Lo que dicen de Huella Estrella</h2>
+        <p class="section-subtitle">
+          Estos testimonios son pequeñas ventanas a la experiencia de quienes han
+          comenzado a acompañarse con nuestros perros terapéuticos.
+        </p>
+
+        <div class="testimonials-grid">
+          <article class="testimonial-card">
+            <p class="testimonial-text">
+              “Empecé el servicio hace unas semanas y ha sido una compañía muy diferente.
+              No es solo tener un perro cerca, es sentir que alguien me espera y me escucha
+              en silencio. Me ha dado paz.”
+            </p>
+            <p class="testimonial-name">– Carmen, 68 años</p>
+          </article>
+
+          <article class="testimonial-card">
+            <p class="testimonial-text">
+              “Trabajo todo el día y mi mamá estaba muy sola en casa. Con las visitas
+              programadas, ahora espera con ilusión a ‘su’ perro y después me cuenta
+              cómo le fue. Le cambió el ánimo.”
+            </p>
+            <p class="testimonial-name">– Luis, hijo de usuaria</p>
+          </article>
+
+          <article class="testimonial-card">
+            <p class="testimonial-text">
+              “Al principio dudaba si esto era para mí, pero la primera visita me hizo
+              sentir acompañado sin sentirme invadido. Ha sido un proceso muy respetuoso
+              y lo agradezco mucho.”
+            </p>
+            <p class="testimonial-name">– José, 61 años</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA AGENDA -->
+    <section id="agenda">
+      <div class="section-inner">
+        <div class="cta-box">
+          <div class="cta-text">
+            <h2>Agenda tu visita o regístrate al próximo evento informativo</h2>
+            <p>
+              Desde esta página podrás elegir día y horario para conocer el centro de
+              entrenamiento y a los perros, o reservar tu lugar en el siguiente evento
+              informativo donde explicamos a detalle cómo funciona Huella Estrella.
+            </p>
+            <p class="cta-small">
+              Muy pronto integraremos formularios para agendar directamente desde la web.
+            </p>
+          </div>
+          <div>
+            <a href="agenda.html" class="btn btn-primary">Agendar visita</a><br><br>
+            <a href="agenda.html" class="btn btn-outline">Registrarme al próximo evento</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="contacto">
+    <div class="footer-inner">
+      <p>© <span id="year"></span> Huella Estrella. Porque tu bienestar tiene Huella.</p>
+      <div class="footer-links">
+        <span>Contacto: <a href="mailto:contacto@huellaestrella.com">contacto@huellaestrella.com</a></span>
+        <a href="#">Aviso de privacidad</a>
+      </div>
+    </div>
+   <script>
+  // Año dinámico en el footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Lógica del mini quiz
+  const quizForm = document.getElementById('huellaQuiz');
+  const quizResult = document.getElementById('quizResult');
+
+  if (quizForm && quizResult) {
+    quizForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Tomar valores seleccionados
+      const formData = new FormData(quizForm);
+      let score = 0;
+      let totalQuestions = 0;
+
+      for (const [name, value] of formData.entries()) {
+        score += parseInt(value, 10);
+        totalQuestions++;
+      }
+
+      // Máximo por pregunta = 3
+      const maxScore = totalQuestions * 3;
+
+      // Limpiamos clases anteriores
+      quizResult.className = 'quiz-result';
+
+      let message = '';
+
+      if (score >= maxScore * 0.75) {
+        quizResult.classList.add('quiz-result--alto');
+        message = `
+          <strong>Parece que la compañía canina podría ayudarte bastante.</strong>
+          Lo que respondiste muestra que la soledad y la necesidad de compañía están muy presentes en tu día a día.
+          Una visita guiada para conocer a los perros podría ser un primer paso muy amable para ti.
+          <br><br>
+          <a href="agenda.html">Agendar una visita al centro de entrenamiento →</a>
+        `;
+      } else if (score >= maxScore * 0.5) {
+        quizResult.classList.add('quiz-result--medio');
+        message = `
+          <strong>Podría ser un buen complemento para tu bienestar.</strong>
+          No todos tus días se sienten igual y quizá no siempre te pesa la soledad,
+          pero la compañía canina podría sumar momentos de calma, rutina y afecto.
+          <br><br>
+          <a href="agenda.html">Conocer más y registrarme a un evento informativo →</a>
+        `;
+      } else {
+        quizResult.classList.add('quiz-result--bajo');
+        message = `
+          <strong>Tal vez hoy no lo sientes como una necesidad clara.</strong>
+          Aun así, siempre es válido explorar nuevas formas de bienestar o pensar
+          en alguien a quien este tipo de compañía podría ayudar.
+          <br><br>
+          <a href="blog.html">Leer más sobre soledad y bienestar con animales →</a>
+        `;
+      }
+
+      quizResult.innerHTML = message;
+      quizResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+</script>
+  </footer>
+
+</body>
+</html>

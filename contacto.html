@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huella Estrella – Porque tu bienestar tiene Huella</title>
+  <meta name="description" content="Huella Estrella es un servicio de compañía canina terapéutica para acompañar a personas que viven soledad y mejorar su bienestar día a día.">
+  <style>
+    /* HOVER SUAVE EN BOTONES */
+.btn {
+  transition: transform 0.15s ease, 
+              box-shadow 0.15s ease, 
+              background 0.15s ease,
+              border-color 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* TARJETAS CON EFECTO LIFT EN HOVER */
+.benefit-card,
+.blog-card,
+.dog-card,
+.testimonial-card,
+.about-card {
+  transition: transform 0.18s ease, 
+              box-shadow 0.18s ease, 
+              border-color 0.18s ease;
+}
+
+.benefit-card:hover,
+.blog-card:hover,
+.dog-card:hover,
+.testimonial-card:hover,
+.about-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  border-color: rgba(205,160,82,0.6); /* dorado suave */
+}
+
+    :root {
+      --bg: #fdf5e8;
+      --bg-soft: #f7ead5;
+      --gold: #cda052;
+      --gold-dark: #b38030;
+      --brown: #4b3a2a;
+      --brown-soft: #7a6450;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      background-color: var(--bg);
+      color: var(--brown);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(253,245,232,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5d3b6;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo-area img {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.4rem;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.2rem;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width 0.2s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 3.5rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-main h1 {
+      font-size: clamp(2.2rem, 3vw + 1rem, 3rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-main p {
+      font-size: 1.1rem;
+      color: var(--brown-soft);
+      margin-bottom: 1.5rem;
+      max-width: 32rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      font-size: 0.8rem;
+      border: 1px solid #e5d3b6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.4rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--white);
+      box-shadow: 0 8px 18px rgba(149,111,47,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(149,111,47,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--brown);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-soft);
+    }
+
+    .hero-note {
+      font-size: 0.9rem;
+      color: var(--brown-soft);
+    }
+
+    .hero-side {
+      background: radial-gradient(circle at top, #f9e3b3 0, #fdf5e8 45%, #fdf5e8 100%);
+      border-radius: 1.75rem;
+      padding: 2rem 1.8rem;
+      box-shadow: 0 14px 40px rgba(126,99,61,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-side::before {
+      content: "";
+      position: absolute;
+      width: 220%;
+      height: 220%;
+      top: -60%;
+      right: -120%;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,255,255,0.5) 0, transparent 55%),
+        radial-gradient(circle at 80% 90%, rgba(255,255,255,0.35) 0, transparent 50%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .hero-side h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-side p {
+      font-size: 0.95rem;
+      color: var(--brown-soft);
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-steps {
+      list-style: none;
+      font-size: 0.9rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-steps li {
+      margin-bottom: 0.55rem;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .hero-steps li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--gold-dark);
+    }
+
+    .hero-tag {
+      font-size: 0.8rem;
+      color: var(--brown-soft);
+      border-top: 1px solid rgba(75,58,42,0.15);
+      padding-top: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    /* SECCIONES GENERALES */
+    section {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+      text-align: left;
+    }
+
+    .section-subtitle {
+      font-size: 0.98rem;
+      color: var(--brown-soft);
+      max-width: 40rem;
+      margin-bottom: 1.8rem;
+    }
+
+    /* SOBRE */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.8rem;
+    }
+
+    .about-card {
+      background: var(--bg-soft);
+      border-radius: 1.4rem;
+      padding: 1.5rem 1.6rem;
+      border: 1px solid #e3cfb0;
+    }
+
+    .about-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-card p {
+      font-size: 0.93rem;
+      color: var(--brown-soft);
+    }
+
+    .pill-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    .pill-list li {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: #fdf0d4;
+    }
+
+    /* BENEFICIOS */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.2rem;
+    }
+
+    .benefit-card {
+      background: var(--bg-soft);
+      border-radius: 1.4rem;
+      padding: 1.3rem 1.4rem;
+      border: 1px solid #e3cfb0;
+      font-size: 0.93rem;
+    }
+
+    .benefit-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .benefit-tagline {
+      font-size: 0.8rem;
+      color: var(--brown-soft);
+      margin-top: 0.4rem;
+    }
+
+    /* BLOG */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.2rem;
+    }
+
+    .blog-card {
+      background: var(--white);
+      border-radius: 1.2rem;
+      padding: 1.2rem 1.3rem;
+      border: 1px solid #ead7bc;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      min-height: 210px;
+    }
+
+    .blog-card h3 {
+      font-size: 1rem;
+    }
+
+    .blog-card p {
+      font-size: 0.9rem;
+      color: var(--brown-soft);
+      flex: 1;
+    }
+
+    .blog-card a {
+      font-size: 0.9rem;
+      color: var(--gold-dark);
+      font-weight: 500;
+    }
+
+    /* CTA AGENDA */
+    .cta-box {
+      background: linear-gradient(135deg, #f6e0b8, #fdf5e8);
+      border-radius: 1.6rem;
+      padding: 1.8rem 1.9rem;
+      border: 1px solid #e3cfb0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cta-text {
+      max-width: 34rem;
+      font-size: 0.98rem;
+    }
+
+    .cta-text h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .cta-small {
+      font-size: 0.85rem;
+      color: var(--brown-soft);
+      margin-top: 0.4rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid #e5d3b6;
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.85rem;
+      color: var(--brown-soft);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-side {
+        order: -1;
+      }
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .benefits-grid,
+      .blog-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      nav ul {
+        display: none; /* versión simple para móvil */
+      }
+      .benefits-grid,
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+      .cta-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero {
+        padding-top: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="nav-container">
+      <div class="logo-area">
+        <img src="logo-huella.png" alt="Logo Huella Estrella">
+        <span class="logo-text">Huella Estrella</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+    	  <li><a href="nosotros.html">Nosotros</a></li>
+    	  <li><a href="blog.html">Blog</a></li>
+    	  <li><a href="agenda.html">Agenda tu visita</a></li>
+    	  <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+<main>
+  <section>
+    <div class="section-inner">
+      <h1 class="section-title">Contacto</h1>
+      <p class="section-subtitle">
+        Si tienes dudas, quieres comentar una situación específica o prefieres
+        hablar antes de agendar, estamos para escucharte. Escríbenos y te
+        responderemos con calma y claridad.
+      </p>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>Datos de contacto</h3>
+          <p>
+            Correo: <a href="mailto:contacto@huellaestrella.com">contacto@huellaestrella.com</a><br>
+            Teléfono / WhatsApp: <strong>+52 (55) 0000 0000</strong><br>
+            Horario de atención: Lunes a viernes, 10:00–18:00 hrs.
+          </p>
+        </div>
+
+        <div class="about-card">
+          <h3>Mensaje rápido</h3>
+          <p style="margin-bottom:0.7rem;">
+            Envíanos un breve mensaje con tu situación y la forma en la que
+            prefieres que te contactemos.
+          </p>
+
+          <form action="mailto:contacto@huellaestrella.com" method="post" enctype="text/plain">
+            <div style="margin-bottom:0.5rem;">
+              <label for="nombre-c">Nombre</label><br>
+              <input id="nombre-c" name="Nombre" type="text" required
+                     style="width:100%;padding:0.45rem;border-radius:0.6rem;border:1px solid #e3cfb0;">
+            </div>
+            <div style="margin-bottom:0.5rem;">
+              <label for="correo-c">Correo</label><br>
+              <input id="correo-c" name="Correo" type="email" required
+                     style="width:100%;padding:0.45rem;border-radius:0.6rem;border:1px solid #e3cfb0;">
+            </div>
+            <div style="margin-bottom:0.5rem;">
+              <label for="mensaje-c">Mensaje</label><br>
+              <textarea id="mensaje-c" name="Mensaje" rows="3"
+                        style="width:100%;padding:0.45rem;border-radius:0.6rem;border:1px solid #e3cfb0;"></textarea>
+            </div>
+            <button type="submit" class="btn btn-outline">Enviar mensaje</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+  <!-- CONTACTO / FOOTER -->
+  <footer id="contacto">
+    <div class="footer-inner">
+      <p>© <span id="year"></span> Huella Estrella. Porque tu bienestar tiene Huella.</p>
+      <div class="footer-links">
+        <span>Contacto: <a href="mailto:contacto@huellaestrella.com">contacto@huellaestrella.com</a></span>
+        <a href="#">Aviso de privacidad</a>
+      </div>
+    </div>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </footer>
+
+</body>
+</html>
